@@ -1,5 +1,8 @@
 # GitHub Download Stats
 
+[![Build Status](https://travis-ci.org/kefir500/ghstats.svg)](https://travis-ci.org/kefir500/ghstats)
+[![GitHub license](https://img.shields.io/github/license/kefir500/ghstats.svg)](https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE)
+
 ## Description
 
 - Python script to obtain GitHub Release download count and other statistics.
