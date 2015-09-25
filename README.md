@@ -48,7 +48,7 @@ Examples for [atom/atom](https://github.com/atom/atom) repository:
 
 ```Shell
 python ghstats.py atom atom            # Fetch download count for all releases.
-python ghstats.py atom/atom            # Fetch download count for all releases (alternative syntax).
+python ghstats.py atom/atom            # Fetch download count for all releases (alt. syntax).
 python ghstats.py atom atom -q         # Quiet mode (print only numerical result).
 python ghstats.py atom atom -d         # Detailed description for every release.
 python ghstats.py atom atom -l         # Fetch download count for the latest release.
