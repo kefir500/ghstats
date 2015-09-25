@@ -21,7 +21,6 @@ class TestStats(unittest.TestCase):
         self.assertTrue(isinstance(stats, list))
         count = ghstats.get_stats_downloads(stats, True)
         self.assertTrue(count > 0)
-        print("Downloads (Total):\t" + str(count))
 
     def test_release(self):
         """
@@ -31,7 +30,6 @@ class TestStats(unittest.TestCase):
         self.assertTrue(isinstance(stats, dict))
         count = ghstats.get_stats_downloads(stats, True)
         self.assertTrue(count > 0)
-        print("Downloads (Latest):\t" + str(count))
 
     def test_invalid(self):
         """
