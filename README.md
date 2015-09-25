@@ -1,7 +1,7 @@
 # GitHub Download Stats
 
 [![Build Status](https://travis-ci.org/kefir500/ghstats.svg)](https://travis-ci.org/kefir500/ghstats)
-[![GitHub license](https://img.shields.io/github/license/kefir500/ghstats.svg)](https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE)
 
 ## Description
 
