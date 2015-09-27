@@ -11,7 +11,7 @@ class TestStats(unittest.TestCase):
         """
         Download all releases.
         """
-        stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, False, None, True)
+        stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, False, ghstats.get_token(), True)
         self.assertTrue(isinstance(stats, list))
         count = ghstats.get_stats_downloads(stats, True)
         self.assertTrue(count > 0)
@@ -20,7 +20,7 @@ class TestStats(unittest.TestCase):
         """
         Download latest release.
         """
-        stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, True, None, True)
+        stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, True, ghstats.get_token(), True)
         self.assertTrue(isinstance(stats, dict))
         count = ghstats.get_stats_downloads(stats, True)
         self.assertTrue(count > 0)
@@ -30,7 +30,7 @@ class TestStats(unittest.TestCase):
         Check nonexistent repository.
         """
         self.assertRaises(ghstats.GithubRepoError,
-                          lambda: ghstats.download_stats("kefir500", "foobar", None, False, None, True))
+                          lambda: ghstats.download_stats("kefir500", "foobar", None, False, ghstats.get_token(), True))
 
 
 if __name__ == '__main__':
