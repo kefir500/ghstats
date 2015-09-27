@@ -1,22 +1,13 @@
 #!/usr/bin/env python
 
-
 """
 Python script to obtain GitHub Release download count and other statistics.
 """
-
 
 import os
 import sys
 import json
 import time
-
-
-__version__ = "1.0.0"
-__author__ = "Alexander Gorishnyak"
-__email__ = "kefir500@gmail.com"
-__license__ = "MIT"
-
 
 try:
     import urllib2
@@ -27,6 +18,11 @@ try:
     input = raw_input
 except NameError:
     pass
+
+__version__ = "1.0.0"
+__author__ = "Alexander Gorishnyak"
+__email__ = "kefir500@gmail.com"
+__license__ = "MIT"
 
 
 class ConnectionError(Exception):
