@@ -253,14 +253,11 @@ def get_stats_downloads(stats, quiet=False):
     :return: Number of downloads.
     """
     total = 0
-    if len(stats) > 0:
-        if isinstance(stats, dict):
-            total = get_release_downloads(stats, quiet)
-        else:
-            for release in stats:
-                total += get_release_downloads(release, quiet)
+    if isinstance(stats, dict):
+        total = get_release_downloads(stats, quiet)
     else:
-        error("No information on this repository.")
+        for release in stats:
+            total += get_release_downloads(release, quiet)
     return total
 
 
