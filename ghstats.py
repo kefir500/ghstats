@@ -29,6 +29,77 @@ except NameError:
     pass
 
 
+class ConnectionError(Exception):
+    """
+    Raised on connection error.
+    """
+
+    def __init__(self, reason=None):
+        """
+        :param reason: Connection error reason.
+        """
+        self.reason = reason if reason else "Unknown reason."
+
+    def __str__(self):
+        return "Connection error: " + str(self.reason)
+
+
+class GithubError(Exception):
+    """
+    Generic exception raised on GitHub API HTTP error.
+    """
+
+    def __init__(self, code, message=None):
+        """
+        :param code: HTTP error code.
+        :param message: Exception message text.
+        """
+        self.code = code
+        self.message = message
+
+    def __str__(self):
+        return "GitHub API HTTP {0}{1}".format(self.code, (": " + self.message) if self.message else "")
+
+
+class GithubRepoError(GithubError):
+    """
+    Raised when accessing nonexistent GitHub username, repository or release tag.
+    """
+
+    def __init__(self, message=None):
+        """
+        :param message: Exception message text.
+        """
+        self.code = 404
+        self.message = message if message else "Invalid GitHub username, repository or release tag."
+
+
+class GithubLimitError(GithubError):
+    """
+    Raised when GitHub API request limit is exceeded.
+    """
+
+    def __init__(self, message=None):
+        """
+        :param message: Exception message text.
+        """
+        self.code = 403
+        self.message = message if message else "Request limit exceeded."
+
+
+class GithubTokenError(GithubError):
+    """
+    Raised when trying to pass invalid GitHub OAuth token.
+    """
+
+    def __init__(self, message=None):
+        """
+        :param message: Exception message text.
+        """
+        self.code = 401
+        self.message = message if message else "Unauthorized. Check your \"GITHUB_TOKEN\" environment variable."
+
+
 class _Text:
     """
     Definitions for colored output (no ANSI colors on Windows).
@@ -111,8 +182,10 @@ def download_stats(user=None, repo=None, tag=None, latest=False, token=None, qui
     :param token: GitHub OAuth token. If empty, API request limit will be reduced.
     :param quiet: If True, print nothing.
     :return: Statistics on downloads.
-    :raises urllib2.HTTPError: On HTTP error.
-    :raises urllib2.URLError: On connection error.
+    :raises GithubRepoError: When accessing nonexistent GitHub username, repository or release tag.
+    :raises GithubLimitError: When GitHub API request limit is exceeded.
+    :raises GithubTokenError: When trying to pass invalid GitHub API OAuth token.
+    :raises ConnectionError: On connection error.
     """
     if not user:
         user = input("GitHub Username: ")
@@ -125,7 +198,19 @@ def download_stats(user=None, repo=None, tag=None, latest=False, token=None, qui
     headers = {} if not token else {"Authorization": "token " + token}
     request = urllib2.Request(url, headers=headers)
     start = time.time()
-    response = urllib2.urlopen(request).read().decode("utf-8")
+    try:
+        response = urllib2.urlopen(request).read().decode("utf-8")
+    except urllib2.HTTPError as e:
+        if e.code == 404:
+            raise GithubRepoError()    # Invalid GitHub username, repository or release tag.
+        elif e.code == 403:
+            raise GithubLimitError()   # GitHub API request limit exceeded.
+        elif e.code == 401:
+            raise GithubTokenError()   # Invalid GitHub OAuth token.
+        else:
+            raise GithubError(e.code)  # Generic GitHub API exception.
+    except urllib2.URLError as e:
+        raise ConnectionError(e.reason)
     stats = json.loads(response)
     if not quiet:
         end = time.time()
@@ -217,16 +302,9 @@ def main(user=None, repo=None, tag=None, latest=False, detail=False, token=None,
         print_greeting()
     try:
         stats = download_stats(user, repo, tag, latest, token, quiet)
-    except urllib2.HTTPError as e:
-        if e.code == 404:
-            error("Invalid GitHub username, repository or release tag.")
-        elif e.code == 403:
-            error("Request limit exceeded.")
-        elif e.code == 401:
-            error("Unauthorized. Check your \"GITHUB_TOKEN\" environment variable.")
-        else:
-            error("HTTP " + str(e.code))
-    except urllib2.URLError:
+    except GithubError as e:
+        error(e.message)
+    except ConnectionError:
         error("Connection error.")
     else:
         total = get_stats_downloads(stats, quiet or not detail)

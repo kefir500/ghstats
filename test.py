@@ -5,12 +5,6 @@ import unittest
 import ghstats
 
 
-try:
-    import urllib2
-except ImportError:
-    import urllib.request as urllib2
-
-
 class TestStats(unittest.TestCase):
 
     def test_releases(self):
@@ -35,7 +29,8 @@ class TestStats(unittest.TestCase):
         """
         Check nonexistent repository.
         """
-        self.assertRaises(urllib2.HTTPError, lambda: ghstats.download_stats("kefir500", "foobar", None, False, None, True))
+        self.assertRaises(ghstats.GithubRepoError,
+                          lambda: ghstats.download_stats("kefir500", "foobar", None, False, None, True))
 
 
 if __name__ == '__main__':
