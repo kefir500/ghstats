@@ -120,7 +120,7 @@ def error(message):
     sys.exit(_Text.ERROR + "Error: " + message + _Text.END)
 
 
-def get_token():
+def get_env_token():
     """
     Get GitHub OAuth token from "GITHUB_TOKEN" environment variable.
     :return: GitHub OAuth token.
@@ -311,13 +311,13 @@ def main_cli(args):
     :param args: Command line arguments (without script name).
     :return: Number of downloads.
     """
-    user = None          # GitHub username
-    repo = None          # GitHub repository
-    tag = None           # GitHub release tag
-    latest = False       # Latest release
-    detail = False       # Detailed output
-    quiet = False        # Quiet output
-    token = get_token()  # GitHub token
+    user = None              # GitHub username
+    repo = None              # GitHub repository
+    tag = None               # GitHub release tag
+    latest = False           # Latest release
+    detail = False           # Detailed output
+    quiet = False            # Quiet output
+    token = get_env_token()  # GitHub token
     for arg in args:
         if arg == "-q" or arg == "--quiet":
             quiet = True
