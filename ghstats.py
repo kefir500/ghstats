@@ -19,7 +19,7 @@ try:
 except NameError:
     pass
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "Alexander Gorishnyak"
 __email__ = "kefir500@gmail.com"
 __license__ = "MIT"
