@@ -6,7 +6,7 @@
 ## Description
 
 - Python script to obtain GitHub Release download count and other statistics.
-- Can be used as a standalone script as well as a Python module.
+- Can be used as both a standalone script and a Python module.
 - Supports both Python 2 and 3 out of the box.
 - [Download](https://github.com/kefir500/ghstats/releases/latest) or manually save `ghstats.py` from the repository.
 
