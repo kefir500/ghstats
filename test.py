@@ -3,7 +3,6 @@
 
 import unittest
 import ghstats
-import os
 
 
 class TestStats(unittest.TestCase):
@@ -33,14 +32,6 @@ class TestStats(unittest.TestCase):
         self.assertRaises(ghstats.GithubRepoError,
                           lambda: ghstats.download_stats("kefir500", "foobar", None, False,
                                                          ghstats.get_env_token(), True))
-
-    def test_envtoken(self):
-        """
-        Check GitHub token environment variable.
-        """
-        os.environ["GITHUB_TOKEN"] = "foobar"
-        token = ghstats.get_env_token()
-        self.assertEqual(token, "foobar")
 
 
 if __name__ == '__main__':
