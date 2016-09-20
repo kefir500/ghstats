@@ -3,6 +3,7 @@
 
 import unittest
 import ghstats
+import os
 
 
 class TestStats(unittest.TestCase):
