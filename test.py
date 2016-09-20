@@ -7,6 +7,13 @@ import ghstats
 
 class TestStats(unittest.TestCase):
 
+    def test_cli(self):
+        """
+        Test command line arguments.
+        """
+        count = ghstats.main_cli(["kefir500/apk-icon-editor", "-q", "-d"])
+        self.assertTrue(count > 0)
+
     def test_releases(self):
         """
         Download all releases.
