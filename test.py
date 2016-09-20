@@ -11,7 +11,7 @@ class TestStats(unittest.TestCase):
         """
         Download all releases.
         """
-        stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, False, ghstats.get_env_token(), True)
+        stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, False, ghstats.get_env_token(), False)
         self.assertTrue(isinstance(stats, list))
         count = ghstats.get_stats_downloads(stats, True)
         self.assertTrue(count > 0)
@@ -20,7 +20,7 @@ class TestStats(unittest.TestCase):
         """
         Download latest release.
         """
-        stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, True, ghstats.get_env_token(), True)
+        stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, True, ghstats.get_env_token(), False)
         self.assertTrue(isinstance(stats, dict))
         count = ghstats.get_stats_downloads(stats, True)
         self.assertTrue(count > 0)
