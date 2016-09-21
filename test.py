@@ -20,7 +20,7 @@ class TestStats(unittest.TestCase):
         """
         stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, False, ghstats.get_env_token(), False)
         self.assertTrue(isinstance(stats, list))
-        count = ghstats.get_stats_downloads(stats, True)
+        count = ghstats.get_stats_downloads(stats, False)
         self.assertTrue(count > 0)
 
     def test_release(self):
@@ -29,7 +29,7 @@ class TestStats(unittest.TestCase):
         """
         stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, True, ghstats.get_env_token(), False)
         self.assertTrue(isinstance(stats, dict))
-        count = ghstats.get_stats_downloads(stats, True)
+        count = ghstats.get_stats_downloads(stats, False)
         self.assertTrue(count > 0)
 
     def test_invalid(self):
