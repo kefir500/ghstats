@@ -41,5 +41,5 @@ class TestStats(unittest.TestCase):
                                                          ghstats.get_env_token(), True))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
