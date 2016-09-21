@@ -32,13 +32,20 @@ class TestStats(unittest.TestCase):
         count = ghstats.get_stats_downloads(stats, False)
         self.assertTrue(count > 0)
 
-    def test_invalid(self):
+    def test_invalid_repo(self):
         """
         Check nonexistent repository.
         """
         self.assertRaises(ghstats.GithubRepoError,
                           lambda: ghstats.download_stats("kefir500", "foobar", None, False,
                                                          ghstats.get_env_token(), True))
+
+    def test_invalid_token(self):
+        """
+        Test invalid token.
+        """
+        self.assertRaises(ghstats.GithubTokenError,
+                          lambda: ghstats.download_stats("kefir500", "foobar", None, False, "FOOBAR", True))
 
 
 if __name__ == "__main__":
