@@ -11,7 +11,7 @@ class TestStats(unittest.TestCase):
         """
         Test command line arguments.
         """
-        count = ghstats.main_cli(["kefir500/apk-icon-editor", "-q", "-d"])
+        count = ghstats.main_cli(["kefir500/apk-icon-editor", "-q", "-d", "-l"])
         self.assertTrue(count > 0)
 
     def test_releases(self):
