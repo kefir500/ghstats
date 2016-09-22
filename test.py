@@ -16,8 +16,10 @@ class TestStats(unittest.TestCase):
         """
         Test command line arguments.
         """
-        count = ghstats.main_cli(["kefir500/apk-icon-editor", "-l", "-d"])
-        self.assertTrue(count > 0)
+        self.assertTrue(ghstats.main_cli(["kefir500", "apk-icon-editor", "-q"]) > 0)
+        self.assertTrue(ghstats.main_cli(["kefir500", "apk-icon-editor", "-l", "-d"]) > 0)
+        self.assertTrue(ghstats.main_cli(["kefir500", "apk-icon-editor", "v1.5.0"]) > 0)
+        self.assertTrue(ghstats.main_cli(["kefir500/apk-icon-editor"]) > 0)
 
     def test_releases(self):
         """
@@ -56,7 +58,7 @@ class TestStats(unittest.TestCase):
         Test if functions halt the script.
         """
         with self.assertRaises(SystemExit) as cm:
-            ghstats.print_help()
+            ghstats.main_cli(["-h"])
         self.assertEqual(cm.exception.code if sys.version_info >= (2, 7) else cm.exception, 0)
         with self.assertRaises(SystemExit) as cm:
             ghstats.error("Test")
