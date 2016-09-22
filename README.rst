@@ -1,7 +1,9 @@
 GitHub Download Stats
 =====================
 
-|Build Status| |License|
+|Build Status|
+|Coverage|
+|License|
 
 Description
 -----------
@@ -91,5 +93,7 @@ License text: `MIT License`_
 
 .. |Build Status| image:: https://travis-ci.org/kefir500/ghstats.svg
    :target: https://travis-ci.org/kefir500/ghstats
+.. |Coverage| image:: https://coveralls.io/repos/github/kefir500/ghstats/badge.svg?branch=master
+   :target: https://coveralls.io/github/kefir500/ghstats?branch=master
 .. |License| image:: https://img.shields.io/badge/license-MIT-blue.svg
    :target: https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE
