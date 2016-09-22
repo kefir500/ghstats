@@ -46,6 +46,17 @@ class TestStats(unittest.TestCase):
         with self.assertRaises(ghstats.GithubTokenError):
             ghstats.download_stats("kefir500", "foobar", None, False, "FOOBAR", True)
 
+    def test_exits(self):
+        """
+        Test if functions halt the script.
+        """
+        with self.assertRaises(SystemExit) as cm:
+            ghstats.print_help()
+        self.assertEqual(cm.exception.code, 0)
+        with self.assertRaises(SystemExit) as cm:
+            ghstats.error("Test")
+        self.assertNotEqual(cm.exception.code, 0)
+
 
 if __name__ == "__main__":
     unittest.main()
