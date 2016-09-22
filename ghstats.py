@@ -37,7 +37,7 @@ class ConnectionError(Exception):
         self.reason = reason if reason else "Unknown reason."
 
     def __str__(self):
-        return "Connection error: " + str(self.reason)
+        return str(self.reason)
 
 
 class GithubError(Exception):
@@ -297,8 +297,8 @@ def main(user=None, repo=None, tag=None, latest=False, detail=False, token=None,
         stats = download_stats(user, repo, tag, latest, token, quiet)
     except GithubError as e:
         error(e.message)
-    except ConnectionError:
-        error("Connection error.")
+    except ConnectionError as e:
+        error(str(e))
     else:
         total = get_stats_downloads(stats, quiet or not detail)
         print_total(total, quiet, tag or (stats["tag_name"] if latest else None))
