@@ -16,7 +16,7 @@ class TestStats(unittest.TestCase):
 
     def test_releases(self):
         """
-        Download all releases.
+        Test statistics for all releases.
         """
         stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, False, ghstats.get_env_token(), False)
         self.assertTrue(isinstance(stats, list))
@@ -25,7 +25,7 @@ class TestStats(unittest.TestCase):
 
     def test_release(self):
         """
-        Download latest release.
+        Test statistics for the latest release.
         """
         stats = ghstats.download_stats("kefir500", "apk-icon-editor", None, True, ghstats.get_env_token(), False)
         self.assertTrue(isinstance(stats, dict))
@@ -34,7 +34,7 @@ class TestStats(unittest.TestCase):
 
     def test_invalid_repo(self):
         """
-        Check nonexistent repository.
+        Test nonexistent repository.
         """
         self.assertRaises(ghstats.GithubRepoError,
                           lambda: ghstats.download_stats("kefir500", "foobar", None, False,
@@ -42,7 +42,7 @@ class TestStats(unittest.TestCase):
 
     def test_invalid_token(self):
         """
-        Test invalid token.
+        Test invalid GitHub personal access token.
         """
         self.assertRaises(ghstats.GithubTokenError,
                           lambda: ghstats.download_stats("kefir500", "foobar", None, False, "FOOBAR", True))
