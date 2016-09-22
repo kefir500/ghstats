@@ -7,6 +7,7 @@ except ImportError:
     import unittest
 
 import ghstats
+import sys
 
 
 class TestStats(unittest.TestCase):
@@ -56,10 +57,10 @@ class TestStats(unittest.TestCase):
         """
         with self.assertRaises(SystemExit) as cm:
             ghstats.print_help()
-        self.assertEqual(cm.exception.code, 0)
+        self.assertEqual(cm.exception.code if sys.version_info >= (2, 7) else cm.exception, 0)
         with self.assertRaises(SystemExit) as cm:
             ghstats.error("Test")
-        self.assertNotEqual(cm.exception.code, 0)
+        self.assertNotEqual(cm.exception.code if sys.version_info >= (2, 7) else cm.exception, 0)
 
 
 if __name__ == "__main__":
