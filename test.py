@@ -36,16 +36,15 @@ class TestStats(unittest.TestCase):
         """
         Test nonexistent repository.
         """
-        self.assertRaises(ghstats.GithubRepoError,
-                          lambda: ghstats.download_stats("kefir500", "foobar", None, False,
-                                                         ghstats.get_env_token(), True))
+        with self.assertRaises(ghstats.GithubRepoError):
+            ghstats.download_stats("kefir500", "foobar", None, False, ghstats.get_env_token(), True)
 
     def test_invalid_token(self):
         """
         Test invalid GitHub personal access token.
         """
-        self.assertRaises(ghstats.GithubTokenError,
-                          lambda: ghstats.download_stats("kefir500", "foobar", None, False, "FOOBAR", True))
+        with self.assertRaises(ghstats.GithubTokenError):
+            ghstats.download_stats("kefir500", "foobar", None, False, "FOOBAR", True)
 
 
 if __name__ == "__main__":
