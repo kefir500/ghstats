@@ -54,6 +54,16 @@ class TestStats(unittest.TestCase):
         with self.assertRaises(ghstats.GithubTokenError):
             ghstats.download_stats("kefir500", "foobar", None, False, "FOOBAR", True)
 
+    def test_unicode(self):
+        """
+        Test Unicode handling.
+        """
+        release = ghstats.download_stats("d3", "d3", "v3.5.0", False, ghstats.get_env_token(), False)
+        try:
+            ghstats.get_release_downloads(release)
+        except UnicodeEncodeError:
+            self.fail("Could not handle Unicode release statistics.")
+
     def test_exits(self):
         """
         Test if functions halt the script.
