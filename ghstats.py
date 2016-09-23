@@ -223,9 +223,10 @@ def get_release_downloads(release, quiet=False):
     """
     downloads_total = 0
     if not quiet:
+        title = release["name"].encode(sys.stdout.encoding, errors='ignore')
         published = time.strptime(release["published_at"], "%Y-%m-%dT%H:%M:%SZ")
         print("")
-        print("          --- " + _Text.HEADER + release["name"] + _Text.END + " ---\n")
+        print("          --- " + _Text.HEADER + title + _Text.END + " ---\n")
         print("         Tag: " + release["tag_name"])
         print("      Author: " + release["author"]["login"])
         print("         URL: " + _Text.UNDERLINE + release["html_url"] + _Text.END)
