@@ -274,7 +274,7 @@ def print_total(total, quiet=False, tag=None):
               .format(_Text.BOLD,
                       "" if not tag else " (" + tag + ")",
                       _Text.SUCCESS + str(total) + _Text.END))
-    elif __name__ == "__main__":
+    elif __name__ == "__main__":  # pragma: no cover
         print(str(total))
     return total
 
@@ -344,7 +344,7 @@ def main_cli(args):
     return main(user, repo, tag, latest, detail, token, quiet)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     try:
         main_cli(sys.argv[1:])
     except KeyboardInterrupt:
