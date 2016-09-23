@@ -18,6 +18,7 @@ class TestStats(unittest.TestCase):
         """
         self.assertTrue(ghstats.main_cli(["kefir500", "apk-icon-editor", "-q"]) > 0)
         self.assertTrue(ghstats.main_cli(["kefir500", "apk-icon-editor", "-l", "-d"]) > 0)
+        self.assertTrue(ghstats.main_cli(["kefir500", "apk-icon-editor", "-l", "-d", "-q"]) > 0)
         self.assertTrue(ghstats.main_cli(["kefir500", "apk-icon-editor", "v1.5.0"]) > 0)
         self.assertTrue(ghstats.main_cli(["kefir500/apk-icon-editor"]) > 0)
 
