@@ -64,6 +64,8 @@ class TestStats(unittest.TestCase):
         with self.assertRaises(SystemExit) as cm:
             ghstats.error("Test")
         self.assertNotEqual(cm.exception.code if sys.version_info >= (2, 7) else cm.exception, 0)
+        with self.assertRaises(SystemExit):
+            ghstats.main_cli(["kefir500/foobar"])
 
 
 if __name__ == "__main__":
