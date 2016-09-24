@@ -225,13 +225,14 @@ def get_release_downloads(release, quiet=False):
     if not quiet:
         encoding = sys.stdout.encoding or "ascii"
         title = release["name"].encode(encoding, 'ignore').decode(encoding)
-        published = time.strptime(release["published_at"], "%Y-%m-%dT%H:%M:%SZ")
+        published = (time.strftime("%c", time.strptime(release["published_at"], "%Y-%m-%dT%H:%M:%SZ"))
+                     if release["published_at"] else "Unpublished")
         print("")
         print("          --- " + _Text.HEADER + title + _Text.END + " ---\n")
         print("         Tag: " + release["tag_name"])
         print("      Author: " + release["author"]["login"])
         print("         URL: " + _Text.UNDERLINE + release["html_url"] + _Text.END)
-        print("Published at: " + time.strftime("%c", published))
+        print("Published at: " + published)
         print("")
     if "assets" in release:
         indent = 13 + len(_Text.BOLD + _Text.END)
