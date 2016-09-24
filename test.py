@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-
 try:
     import unittest2 as unittest
 except ImportError:
@@ -8,6 +7,7 @@ except ImportError:
 
 import ghstats
 import sys
+import os
 
 
 class TestStats(unittest.TestCase):
