@@ -17,7 +17,7 @@ install:
   - pip install coveralls
 
 script:
-  - coverage run --source ghstats test.py
+  - coverage run --source ghstats/ghstats.py tests/test_ghstats.py
 
 after_success:
   - coveralls

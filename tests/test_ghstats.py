@@ -5,9 +5,11 @@ try:
 except ImportError:
     import unittest
 
-import ghstats
 import sys
 import os
+
+os.sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from ghstats import ghstats  # noqa
 
 
 class TestStats(unittest.TestCase):
