@@ -64,6 +64,19 @@ class TestStats(unittest.TestCase):
         except UnicodeEncodeError:
             self.fail("Could not handle Unicode release statistics.")
 
+    def test_colors(self):
+        """
+        Test colored output for different operating systems.
+        """
+        if os.name is not "nt":
+            self.assertNotEquals("{0}Test{1}".format(ghstats._Text.SUCCESS, ghstats._Text.END), "Test")
+            os_name = os.name
+            os.name = "nt"
+            self.assertEqual("{0}Test{1}".format(ghstats._Text.SUCCESS, ghstats._Text.END), "Test")
+            os.name = os_name
+        else:
+            self.assertEqual("{0}Test{1}".format(ghstats._Text.SUCCESS, ghstats._Text.END), "Test")
+
     def test_exits(self):
         """
         Test if functions halt the script.
