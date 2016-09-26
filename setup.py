@@ -6,7 +6,7 @@ with open(path.join(path.abspath(path.dirname(__file__)), 'README.rst')) as f:
 
 setup(
     name='ghstats',
-    version='1.1.0',
+    version='1.1.1',
     packages=['ghstats'],
     description='GitHub Release download count and other statistics.',
     long_description=readme,
