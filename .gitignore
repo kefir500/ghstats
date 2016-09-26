@@ -1,3 +1,6 @@
-.idea/
-.coverage
 *.pyc
+.coverage
+.idea/
+*.egg-info/
+build/
+dist/
