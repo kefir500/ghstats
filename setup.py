@@ -15,6 +15,11 @@ setup(
     license='MIT',
     url='https://github.com/kefir500/ghstats',
     keywords='github release download count stats statistics',
+    entry_points={
+        'console_scripts': [
+            'ghstats = ghstats.ghstats:main_cli'
+        ]
+    },
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Console',

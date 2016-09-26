@@ -308,7 +308,7 @@ def main(user=None, repo=None, tag=None, latest=False, detail=False, token=None,
         return total
 
 
-def main_cli(args):
+def main_cli(args=None):
     """
     Parse command line arguments and pass to the main function.
     :param args: Command line arguments (without script name).
@@ -321,6 +321,8 @@ def main_cli(args):
     detail = False           # Detailed output
     quiet = False            # Quiet output
     token = get_env_token()  # GitHub token
+    if args is None:
+        args = sys.argv[1:]
     for arg in args:
         if arg == "-q" or arg == "--quiet":
             quiet = True
