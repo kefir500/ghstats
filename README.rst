@@ -80,6 +80,26 @@ Examples for `atom/atom`_ repository:
     ghstats                      # Get input for username and repository from user.
     ghstats -h                   # Print help.
 
+Changelog
+---------
+
+**v1.1.1**
+
+- First `PyPI`_ release (`issue #3`_).
+
+**v1.1.0**
+
+- Fix error on Unicode titles (`issue #1`_).
+- Fix error on draft release (`issue #4`_).
+
+**v1.0.1**
+
+- Redesigned exceptions (`issue #2`_).
+
+**v1.0.0**
+
+- Initial release.
+
 License
 -------
 
