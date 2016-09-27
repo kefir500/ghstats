@@ -277,7 +277,7 @@ def print_total(total, quiet=False, tag=None):
               .format(_Text.BOLD,
                       "" if not tag else " (" + tag + ")",
                       _Text.SUCCESS + str(total) + _Text.END))
-    elif __name__ == "__main__":  # pragma: no cover
+    elif __name__ == "__main__" or __name__ == "ghstats.ghstats":  # pragma: no cover
         print(str(total))
     return total
 
