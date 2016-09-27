@@ -1,7 +1,6 @@
 import ghstats
-import sys
 
 try:
-    ghstats.main_cli(sys.argv[1:])
+    ghstats.main_cli()
 except KeyboardInterrupt:
     pass
