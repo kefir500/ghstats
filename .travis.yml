@@ -15,9 +15,11 @@ env:
 install:
   - pip install unittest2
   - pip install coveralls
+  - pip install codecov
 
 script:
   - coverage run --source ghstats/ghstats.py tests/test_ghstats.py
 
 after_success:
   - coveralls
+  - codecov
