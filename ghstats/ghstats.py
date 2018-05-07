@@ -224,7 +224,7 @@ def get_release_downloads(release, quiet=False):
     downloads_total = 0
     if not quiet:
         encoding = sys.stdout.encoding or "ascii"
-        title = release["name"].encode(encoding, 'ignore').decode(encoding)
+        title = (release["name"] or release["tag_name"]).encode(encoding, 'ignore').decode(encoding)
         published = (time.strftime("%c", time.strptime(release["published_at"], "%Y-%m-%dT%H:%M:%SZ"))
                      if release["published_at"] else "Unpublished")
         print("")
