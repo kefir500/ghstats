@@ -2,6 +2,7 @@ GitHub Download Stats
 =====================
 
 |Build Status|
+|Code Quality|
 |Coverage|
 |Version|
 |Support|
@@ -83,6 +84,10 @@ Examples for `atom/atom`_ repository:
 Changelog
 ---------
 
+**v1.2.0**
+
+- Fix error on empty release title (`issue #5`_).
+
 **v1.1.1**
 
 - First `PyPI`_ release (`issue #3`_).
@@ -119,10 +124,13 @@ License text: `MIT License`_
 .. _issue #2: https://github.com/kefir500/ghstats/issues/2
 .. _issue #3: https://github.com/kefir500/ghstats/issues/3
 .. _issue #4: https://github.com/kefir500/ghstats/issues/4
+.. _issue #5: https://github.com/kefir500/ghstats/issues/5
 .. _MIT License: https://raw.githubusercontent.com/kefir500/ghstats/master/LICENSE
 
 .. |Build Status| image:: https://travis-ci.org/kefir500/ghstats.svg
    :target: https://travis-ci.org/kefir500/ghstats
+.. |Code Quality| image:: https://img.shields.io/codacy/grade/f79a8e1ad6764ae4ba420f063e3bac90.svg
+   :target: https://app.codacy.com/app/kefir500/ghstats/dashboard
 .. |Coverage| image:: https://coveralls.io/repos/github/kefir500/ghstats/badge.svg?branch=master
    :target: https://coveralls.io/github/kefir500/ghstats?branch=master
 .. |Version| image:: https://img.shields.io/pypi/v/ghstats.svg
