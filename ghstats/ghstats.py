@@ -7,6 +7,7 @@ Python script to obtain GitHub Release download count and other statistics.
 import os
 import sys
 import json
+import re
 import time
 
 try:
@@ -167,6 +168,23 @@ def print_greeting():
     print("GitHub Download Stats\n"
           "Author: Alexander Gorishnyak <kefir500@gmail.com>\n")
 
+def fetch(url, headers):
+    request = urllib2.Request(url, headers=headers)
+    try:
+        response = urllib2.urlopen(request)
+    except urllib2.HTTPError as e:
+        if e.code == 404:
+            raise GithubRepoError()    # Invalid GitHub username, repository or release tag.
+        elif e.code == 403:
+            raise GithubLimitError()   # GitHub API request limit exceeded.
+        elif e.code == 401:
+            raise GithubTokenError()   # Invalid GitHub OAuth token.
+        else:
+            raise GithubError(e.code)  # Generic GitHub API exception.
+    except urllib2.URLError as e:
+        raise ConnectionError(e.reason)
+    return response
+
 
 def download_stats(user=None, repo=None, tag=None, latest=False, token=None, quiet=False):
     """
@@ -193,22 +211,16 @@ def download_stats(user=None, repo=None, tag=None, latest=False, token=None, qui
     url += ("" if not tag else "/tags/" + tag) if not latest else "/latest"
     url += "?per_page=100"
     headers = {} if not token else {"Authorization": "token " + token}
-    request = urllib2.Request(url, headers=headers)
     start = time.time()
-    try:
-        response = urllib2.urlopen(request).read().decode("utf-8")
-    except urllib2.HTTPError as e:
-        if e.code == 404:
-            raise GithubRepoError()    # Invalid GitHub username, repository or release tag.
-        elif e.code == 403:
-            raise GithubLimitError()   # GitHub API request limit exceeded.
-        elif e.code == 401:
-            raise GithubTokenError()   # Invalid GitHub OAuth token.
-        else:
-            raise GithubError(e.code)  # Generic GitHub API exception.
-    except urllib2.URLError as e:
-        raise ConnectionError(e.reason)
-    stats = json.loads(response)
+    response = fetch(url, headers)
+    stats = json.loads(response.read().decode("utf-8"))
+    while "Link" in response.headers:
+        match = re.search(".*<(.*)>; rel=\"next\"", response.headers["Link"])
+        if not match:
+            break
+        next_url = match.group(1)
+        response = fetch(next_url, headers)
+        stats.extend(json.loads(response.read().decode("utf-8")))
     if not quiet:
         end = time.time()
         print("Downloaded in {0:.3f}s".format(end - start))
