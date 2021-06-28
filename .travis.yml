@@ -10,7 +10,6 @@ python:
   - "nightly"
 
 install:
-  - pip install unittest2
   - pip install coveralls
   - pip install codecov
 
