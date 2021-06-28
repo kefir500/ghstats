@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
+import unittest
 import sys
 import os
 
@@ -72,10 +68,10 @@ class TestStats(unittest.TestCase):
         """
         with self.assertRaises(SystemExit) as cm:
             ghstats.main_cli(["-h"])
-        self.assertEqual(cm.exception.code if sys.version_info >= (2, 7) else cm.exception, 0)
+        self.assertEqual(cm.exception.code, 0)
         with self.assertRaises(SystemExit) as cm:
             ghstats.error("Test")
-        self.assertNotEqual(cm.exception.code if sys.version_info >= (2, 7) else cm.exception, 0)
+        self.assertNotEqual(cm.exception.code, 0)
         with self.assertRaises(SystemExit):
             ghstats.main_cli(["kefir500/foobar"])
 

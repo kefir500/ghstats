@@ -13,7 +13,6 @@ Description
 
 - Python script to obtain GitHub Release download count and other statistics.
 - Can be used as both a standalone script and a Python module.
-- Supports both Python 2 and 3 out of the box.
 
 Installation
 ------------

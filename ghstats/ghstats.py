@@ -9,16 +9,7 @@ import sys
 import json
 import re
 import time
-
-try:
-    import urllib2
-except ImportError:
-    import urllib.request as urllib2
-
-try:
-    input = raw_input
-except NameError:
-    pass
+import urllib.request
 
 __version__ = "1.2.0"
 __author__ = "Alexander Gorishnyak"
@@ -169,10 +160,10 @@ def print_greeting():
           "Author: Alexander Gorishnyak <kefir500@gmail.com>\n")
 
 def fetch(url, headers):
-    request = urllib2.Request(url, headers=headers)
+    request = urllib.request.Request(url, headers=headers)
     try:
-        response = urllib2.urlopen(request)
-    except urllib2.HTTPError as e:
+        response = urllib.request.urlopen(request)
+    except urllib.request.HTTPError as e:
         if e.code == 404:
             raise GithubRepoError()    # Invalid GitHub username, repository or release tag.
         elif e.code == 403:
@@ -181,7 +172,7 @@ def fetch(url, headers):
             raise GithubTokenError()   # Invalid GitHub OAuth token.
         else:
             raise GithubError(e.code)  # Generic GitHub API exception.
-    except urllib2.URLError as e:
+    except urllib.request.URLError as e:
         raise ConnectionError(e.reason)
     return response
 
