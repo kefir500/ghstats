@@ -11,7 +11,7 @@ import re
 import time
 import urllib.request
 
-__version__ = "1.2.0"
+__version__ = "2.0.0"
 __author__ = "Alexander Gorishnyak"
 __email__ = "kefir500@gmail.com"
 __license__ = "MIT"

@@ -83,6 +83,11 @@ Examples for `atom/atom`_ repository:
 Changelog
 ---------
 
+**v2.0.0**
+
+- Add support for GitHub API pagination.
+- Drop support for Python 2.
+
 **v1.2.0**
 
 - Fix error on empty release title (`issue #5`_).
