@@ -77,7 +77,7 @@ class GithubLimitError(GithubError):
 
 class GithubTokenError(GithubError):
     """
-    Raised when trying to pass invalid GitHub OAuth token.
+    Raised when trying to pass invalid GitHub personal access token.
     """
 
     def __init__(self, message=None):
@@ -114,8 +114,8 @@ def error(message):
 
 def get_env_token():
     """
-    Get GitHub OAuth token from "GITHUB_TOKEN" environment variable.
-    :return: GitHub OAuth token.
+    Get GitHub personal access token from "GITHUB_TOKEN" environment variable.
+    :return: GitHub personal access token.
     """
     token = None if "GITHUB_TOKEN" not in os.environ else os.environ["GITHUB_TOKEN"]
     return token
@@ -145,7 +145,7 @@ def print_help():
           "  {0}-h{1}, {0}--help{1}    Show this help.\n"
           .format(_Text.BOLD, _Text.END))
     print("Environment Variables:\n"
-          "  {0}GITHUB_TOKEN{2}   GitHub OAuth token.\n"
+          "  {0}GITHUB_TOKEN{2}   GitHub personal access token.\n"
           "                 Use to increase API request limit.\n"
           "                 {1}https://github.com/settings/tokens{2}"
           .format(_Text.BOLD, _Text.UNDERLINE, _Text.END))
@@ -169,7 +169,7 @@ def fetch(url, headers):
         elif e.code == 403:
             raise GithubLimitError()   # GitHub API request limit exceeded.
         elif e.code == 401:
-            raise GithubTokenError()   # Invalid GitHub OAuth token.
+            raise GithubTokenError()   # Invalid GitHub personal access token.
         else:
             raise GithubError(e.code)  # Generic GitHub API exception.
     except urllib.request.URLError as e:
@@ -184,12 +184,12 @@ def download_stats(user=None, repo=None, tag=None, latest=False, token=None, qui
     :param repo: GitHub repository name. If empty, user will be prompted for input.
     :param tag: Release tag name. If empty, get stats for all releases.
     :param latest: If True, ignore "tag" parameter and get stats for the latest release.
-    :param token: GitHub OAuth token. If empty, API request limit will be reduced.
+    :param token: GitHub personal access token. If empty, API request limit will be reduced.
     :param quiet: If True, print nothing.
     :return: Statistics on downloads.
     :raises GithubRepoError: When accessing nonexistent GitHub username, repository or release tag.
     :raises GithubLimitError: When GitHub API request limit is exceeded.
-    :raises GithubTokenError: When trying to pass invalid GitHub API OAuth token.
+    :raises GithubTokenError: When trying to pass invalid GitHub personal access token.
     :raises ConnectionError: On connection error.
     """
     if not user:
@@ -294,7 +294,7 @@ def main(user=None, repo=None, tag=None, latest=False, detail=False, token=None,
     :param tag: Release tag name. If empty, get stats for all releases.
     :param latest: If True, ignore "tag" parameter and get stats for the latest release.
     :param detail: Detailed output containing release information.
-    :param token: GitHub OAuth token. If empty, API request limit will be reduced.
+    :param token: GitHub personal access token. If empty, API request limit will be decreased.
     :param quiet: If True, print nothing.
     :return: Number of downloads.
     """

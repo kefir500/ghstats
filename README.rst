@@ -54,11 +54,11 @@ Option               Description
 
 - *Environment Variables:*
 
-==================== =========================================================
+==================== ===================================================================
 Environment Variable Description
-==================== =========================================================
-``GITHUB_TOKEN``     `GitHub OAuth token`_. Use to increase API request limit.
-==================== =========================================================
+==================== ===================================================================
+``GITHUB_TOKEN``     `GitHub personal access token`_. Use to increase API request limit.
+==================== ===================================================================
 
 Examples
 --------
@@ -123,7 +123,7 @@ License text: `MIT License`_
 .. _PyPI: https://pypi.python.org/pypi/ghstats
 .. _repository: https://github.com/kefir500/ghstats/archive/master.zip
 .. _atom/atom: https://github.com/atom/atom
-.. _GitHub OAuth token: https://github.com/settings/tokens
+.. _GitHub personal access token: https://github.com/settings/tokens
 .. _issue #1: https://github.com/kefir500/ghstats/issues/1
 .. _issue #2: https://github.com/kefir500/ghstats/issues/2
 .. _issue #3: https://github.com/kefir500/ghstats/issues/3
